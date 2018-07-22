@@ -60,3 +60,12 @@ body{
  	cursor: pointer;
  }
  }
+
+ /*	调整show页面的头像图片显示方式*/
+ .users-show-page{
+ 	.user-info{
+ 	 .thumbnail{
+ 		margin-bottom:0px;
+ 	}
+ 	}
+ }
