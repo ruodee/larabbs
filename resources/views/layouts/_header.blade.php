@@ -30,7 +30,7 @@
 				@else
 <li class="dropdown">
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-		<span class="user-avatar pull-left" style="margin-right:8px;margin-top: -5px">
+		<span class="user-avatar pull-left" style="margin-right:8px;margin-top:3px">
 			<img src={{ Auth::user()->avatar ? Auth::user()->avatar : "https://fsdhubcdn.phphub.org/uploads/images/201709/20/1/PtDKbASVcz.png?imageView2/1/w/60/h/60" }} 
 			class="img-responsive img-circle" width="30px" height="30px">
 		</span>
