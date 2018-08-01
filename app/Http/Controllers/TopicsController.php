@@ -45,7 +45,8 @@ class TopicsController extends Controller
 	public function edit(Topic $topic)
 	{
         $this->authorize('update', $topic);
-		return view('topics.create_and_edit', compact('topic'));
+        $categories = Category::all();
+		return view('topics.create_and_edit', compact('topic','categories'));
 	}
 
 	public function update(TopicRequest $request, Topic $topic)
@@ -74,7 +75,7 @@ class TopicsController extends Controller
 		//判断是否有上传文件，并赋值给$file
 		if($file = $request->upload_file){
 			//保存文件到本地
-			$request = $uploader->save($request->upload_file,'topics',\Auth::id(),1024);
+			$request = $uploader->save($request->upload_file,'topics',\Auth::id(),240);
 			//图片保存成功则更新返回数据$data
 			if($result){
 				$data['file_path'] = $result['path'];
