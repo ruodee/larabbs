@@ -3,7 +3,8 @@
 namespace App\Observers;
 
 use App\Models\Topic;
-use App\Handlers\SlugTranslateHandler;
+//use App\Handlers\SlugTranslateHandler;
+use App\Jobs\TranslateSlug;
 
 // creating, created, updating, updated, saving,
 // saved,  deleting, deleted, restoring, restored
@@ -21,7 +22,7 @@ class TopicObserver
         //
     }
 
-    public function saving(Topic $topic){
+    public function saved(Topic $topic){
     	// //XSS过滤
     	// $topic->body = clean($topic->body,'user_topic_body');
 
@@ -32,7 +33,9 @@ class TopicObserver
 
     	if(!$topic->slug)
     	{
-    		$topic->slug = app(SlugTranslateHandler::class)->translate($topic->title);
+    		//$topic->slug = app(SlugTranslateHandler::class)->translate($topic->title);
+            //推送队列任务
+            dispatch(new TranslateSlug($topic));
     	}
     }
 }
