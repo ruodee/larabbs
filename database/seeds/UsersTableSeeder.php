@@ -17,8 +17,15 @@ class UsersTableSeeder extends Seeder
 
         //头像假数据
         $avatars = [
-        	'http://larabbs.test/uploads/images/avatars/201807/25/4_1532525557_ByV8j3V1p1.png',
-        	'http://larabbs.test/uploads/images/avatars/201807/25/3_1532530921_4RqD2NnAdq.png',
+        	'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3742063763,2958503910&fm=27&gp=0.jpg',
+            'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=343678904,334730120&fm=27&gp=0.jpg',
+            'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1095858509,2481563382&fm=27&gp=0.jpg',
+            'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2454940948,2928890501&fm=27&gp=0.jpg',
+            'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2084235726,2281056412&fm=27&gp=0.jpg',
+            'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1299163568,3887769700&fm=27&gp=0.jpg',
+            'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1658843498,1045854784&fm=27&gp=0.jpg',
+            'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2011925530,97453750&fm=27&gp=0.jpg',
+        	'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2078807388,4269446327&fm=27&gp=0.jpg',
         ];
         //生成数据集合
         $users = factory(User::class)

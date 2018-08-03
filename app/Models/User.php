@@ -39,4 +39,8 @@ class User extends Authenticatable
         else
             return false;
     }
+
+    public function replies(){
+        return $this->hasMany(Reply::class);
+    }
 }
