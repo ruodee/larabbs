@@ -12,7 +12,7 @@ class ReplyRequest extends Request
             case 'POST':
             {
                 return [
-                    // CREATE ROLES
+                    'content' => 'required|min:2',
                 ];
             }
             // UPDATE
@@ -36,6 +36,8 @@ class ReplyRequest extends Request
     {
         return [
             // Validation messages
+            'content.required' =>'回复内容为空，难道你真的无话可说吗？',
+            'content.min' => '回复的内容太少了，请超过两个字符',
         ];
     }
 }
