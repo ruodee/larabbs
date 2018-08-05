@@ -170,3 +170,15 @@ body{
  		color:#b3b3b3;
  	}
  }
+
+ /* Notifiations-badge */
+
+ .notifications-badge{
+ 	margin-top: -1;
+ 	.badge-fade{
+ 		background-color: #E8E8E8; 
+ 	}
+ 	.badge-hint {
+ 		background-color: #d15b47 !important;
+ 	}
+ }
