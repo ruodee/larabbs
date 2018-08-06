@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Auth;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+    use HasRoles;
     use Notifiable { notify as protected laravelNotify;}
     public function notify($instance){
         //如果要通知的是当前用户，也就是$thi->id==Auth::id();就没有必要通知了
