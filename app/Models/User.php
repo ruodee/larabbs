@@ -61,4 +61,22 @@ class User extends Authenticatable
         $this->save();
         $this->unreadNotifications->markAsRead();
     }
+    //password属性的模型修改器，发生在写入数据库前
+
+    public function setPasswordAttribute($value){
+        if(strlen($value)!=60)
+            $value = bcrypt($value);
+        $this->attributes['password'] = $value;
+
+    }
+    //avatar用户头像模型的修改器，拼接URL
+
+    public function setAvatarAttribute($path){
+        //如果不是'http'子串开头，那就是从管理后台上传的，需要补全URL
+        if(!starts_with($path,'http')){
+            //拼接完整的URL
+            $path = config('app.url')."/uploads/images/avatars/$path";
+        }
+        $this->attributes['avatar'] = $path;
+    }
 }
