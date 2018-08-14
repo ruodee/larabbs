@@ -12,6 +12,8 @@ class User extends Authenticatable
     use Traits\ActiveUserHelper;
     use HasRoles;
     use Notifiable { notify as protected laravelNotify;}
+    //记录用户最后登录时间
+    use Traits\LastActivedAtHelper;
     public function notify($instance){
         //如果要通知的是当前用户，也就是$thi->id==Auth::id();就没有必要通知了
         if($this->id == Auth::id()){
@@ -80,4 +82,7 @@ class User extends Authenticatable
         }
         $this->attributes['avatar'] = $path;
     }
+
+    
+
 }
