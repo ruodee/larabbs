@@ -27,6 +27,7 @@ appID
 wx56952517d6365abf
 appsecret
 48f0204034dec41e6a45b929cd40cbb7
+code=021O2MPz0RMAJf16DiMz0ljzPz0O2MPB
 
 https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx56952517d6365abf&secret=48f0204034dec41e6a45b929cd40cbb7&code=021O2MPz0RMAJf16DiMz0ljzPz0O2MPB&grant_type=authorization_code
 
