@@ -37,6 +37,8 @@ $api->version('v1',[
 			//编辑登录用户信息
 			$api->patch('user','UsersController@update')
 				->name('api.user.update');
+			$api->post('topics','TopicsController@store')
+				->name('api.topics.store');
 		});
 		//短信验证码
 		$api->post('vertificationCodes','VertificationCodesController@store')
