@@ -20,7 +20,7 @@ class TopicsController extends Controller
     		->setStatusCode(201);
     }
 
-    public function update(TopicRequest $request,Topix $topic)
+    public function update(TopicRequest $request,Topic $topic)
     {
     	$this->authorize('update',$topic);
 
