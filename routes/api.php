@@ -39,6 +39,8 @@ $api->version('v1',[
 				->name('api.user.update');
 			$api->post('topics','TopicsController@store')
 				->name('api.topics.store');
+			$api->patch('topics/{topic}','TopicsController@update')
+				->name('api.topics.update');
 		});
 		//短信验证码
 		$api->post('vertificationCodes','VertificationCodesController@store')
