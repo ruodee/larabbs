@@ -32,6 +32,7 @@ $api->version('v1',[
 			->name('api.topics.show');
 		$api->get('users/{user}/topics','TopicsController@userIndex')
 			->name('api.users.topics.index');
+
 		//需要token验证访问的接口
 		$api->group(['middleware' => 'api.auth'],function($api){
 			//当前登录用户信息接口
@@ -49,6 +50,9 @@ $api->version('v1',[
 				->name('api.topics.update');
 			$api->delete('topics/{topic}','TopicsController@destroy')
 				->name('api.topics.destroy');
+			//发布回复
+			$api->post('topics/{topic}/replies','RepliesController@store')
+				->name('api.topics.replies.store');
 		});
 		//短信验证码
 		$api->post('vertificationCodes','VertificationCodesController@store')
