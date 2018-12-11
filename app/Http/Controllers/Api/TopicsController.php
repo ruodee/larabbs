@@ -6,6 +6,7 @@ use App\Models\Topic;
 use Illuminate\Http\Request;
 use App\Transformers\TopicTransformer;
 use App\Http\Requests\Api\TopicRequest;
+use App\Models\User;
 
 
 class TopicsController extends Controller
@@ -34,5 +35,35 @@ class TopicsController extends Controller
         $this->authorize('destroy',$topic);
         $topic->delete();
         return $this->response->noContent();
+    }
+
+    public function index(Request $request,Topic $topic)
+    {
+        $query = $topic->query();
+
+        if($categoryId = $request->category_id){
+
+            $query->where('category_id',$categoryId);
+        }
+        //先用N+1问题查询
+        switch($request->order){
+            case 'recent':
+                $query->recent();
+                break;
+            default:
+                $query->recentReplied();
+                break;
+        }
+
+        $topics = $query->paginate(20);
+        return $this->paginator($topics,new TopicTransformer());
+    }
+
+    public function userIndex(User $user,Request $request)
+    {
+        $topics = $user->topics()->recent()
+            ->paginate(20);
+
+        return $this->response->paginator($topics,new TopicTransformer());
     }
 }
