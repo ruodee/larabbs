@@ -53,6 +53,9 @@ $api->version('v1',[
 			//发布回复
 			$api->post('topics/{topic}/replies','RepliesController@store')
 				->name('api.topics.replies.store');
+			//删除回复
+			$api->delete('topics/{topic}/replies/{reply}','RepliesController@destroy')
+				->name('api.topics.replies.destroy');
 		});
 		//短信验证码
 		$api->post('vertificationCodes','VertificationCodesController@store')
