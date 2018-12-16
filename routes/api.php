@@ -38,6 +38,9 @@ $api->version('v1',[
 			->name('api.topics.replies.index');
 		$api->get('users/{user}/replies','RepliesController@userIndex')
 			->name('api.users.replies.index');
+		//资源推荐
+		$api->get('links','LinksController@index')
+			->name('api.links.index');
 
 		//需要token验证访问的接口
 		$api->group(['middleware' => 'api.auth'],function($api){
