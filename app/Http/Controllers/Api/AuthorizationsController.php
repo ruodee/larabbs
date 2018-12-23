@@ -10,9 +10,11 @@ use App\Http\Requests\Api\AuthorizationRequest;
 use Zend\Diactoros\Response as Psr7Response;
 use Psr\Http\Message\ServerRequestInterface;
 use League\OAuth2\Server\AuthorizationServer;
+use App\Traits\PassportToken;
 
 class AuthorizationsController extends Controller
 {
+    use PassportToken;
     public function socialStore($type,SocialAuthorizationRequest $request)
     {
     	if(!in_array($type,['weixin'])){
@@ -35,6 +37,7 @@ class AuthorizationsController extends Controller
     		}
 
     		$oauthUser = $driver->userFromToken($token);
+
     		}catch(\Exception $e){
     			return $this->response->errorUnauthorized('参数错误，未获取用户信息');
     		}
@@ -58,8 +61,8 @@ class AuthorizationsController extends Controller
     			}
     			break;
     		}
-
-    		return $this->respondWithToken($token)->setStatusCode(201);
+            $result = $this->getBearerTokenByUser($user,'1',false);
+            return $this->response->array($result)->setStatusCode(201);
     }//socialStore函数结束
 
     public function store(AuthorizationRequest $originRequest,AuthorizationServer $server,ServerRequestInterface $serverRequest)
