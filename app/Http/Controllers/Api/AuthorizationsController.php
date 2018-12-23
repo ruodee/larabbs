@@ -7,6 +7,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\SocialAuthorizationRequest;
 use App\Http\Requests\Api\AuthorizationRequest;
+use Zend\Diactoros\Response as Psr7Response;
+use Psr\Http\Message\ServerRequestInterface;
+use League\OAuth2\Server\AuthorizationServer;
 
 class AuthorizationsController extends Controller
 {
@@ -59,23 +62,14 @@ class AuthorizationsController extends Controller
     		return $this->respondWithToken($token)->setStatusCode(201);
     }//socialStore函数结束
 
-    public function store(AuthorizationRequest $request)
+    public function store(AuthorizationRequest $originRequest,AuthorizationServer $server,ServerRequestInterface $serverRequest)
     {
-        $username = $request->username;
-
-        filter_var($username,FILTER_VALIDATE_EMAIL) ?
-            $credentials['email'] = $username :
-            $credentials['phone'] = $username;
-
-        $credentials['password'] = $request->password;
-
-        if(!$token = \Auth::guard('api')->attempt($credentials)){
-            return $this->response->errorUnauthorized(trans('auth.failed'));
+        try{
+            return $server->respondToAccessTokenRequest($serverRequest,new Psr7Response)->withStatus(201);
+        } catch(OAuthServerException $e){
+            return $this->response->errorUnauthorized($e->getMessage());
         }
-
-        return $this->respondWithToken($token)->setStatusCode(201);
-
-    }//本地登录store()结束
+    }
     //封装respondWithToken($token)
     public function respondWithToken($token)
     {
@@ -86,15 +80,18 @@ class AuthorizationsController extends Controller
         ]);
     }
     //刷新token
-    public function update()
+    public function update(AuthorizationServer $server,ServerRequestInterface $serverRequest)
     {
-        $token = Auth::guard('api')->refresh();
-        return $this->respondWithToken($token);
+       try{
+        return $server->respondToAccessTokenRequest($serverRequest,new Psr7Response);
+       } catch(OAuthServerException $e){
+        return $this->response->errorUnauthorized($e->getMessage());
+       }
     }
     //销毁token
     public function destroy()
     {
-        Auth::guard('api')->logout();
+        $this->user()->token()->revoke();
         return $this->response->noContent();
     }
 }
