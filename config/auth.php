@@ -42,7 +42,8 @@ return [
         ],
 
         'api' => [
-            'driver' => 'passport',
+            //临时修改，passport分支下应该是dirver => passport
+            'driver' => 'jwt',
             'provider' => 'users',
         ],
     ],
