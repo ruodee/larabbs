@@ -95,8 +95,11 @@ class AuthorizationsController extends Controller
     //销毁token
     public function destroy()
     {
-        $this->user()->token()->revoke();
+        Auth::guard('api')->logout();
         return $this->response->noContent();
+        //use passport 删除登录信息
+        // $this->user()->token()->revoke();
+        // return $this->response->noContent();
     }
 
     //微信小程序登录
