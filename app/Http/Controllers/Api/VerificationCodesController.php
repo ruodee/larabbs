@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Overtrue\EasySms\EasySms;
-use App\Http\Requests\Api\VertificationCodeRequest;
+use App\Http\Requests\Api\VerificationCodeRequest;
 //use App\Http\Controllers\Controller;
 
-class VertificationCodesController extends Controller
+class VerificationCodesController extends Controller
 {
     //
-    public function store(VertificationCodeRequest $request,EasySms $easySms)
+    public function store(VerificationCodeRequest $request,EasySms $easySms)
     {
     	$captchaData = \Cache::get($request->captcha_key);
         if(!$captchaData){

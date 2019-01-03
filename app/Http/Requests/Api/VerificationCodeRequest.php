@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Api;
 
 
-class VertificationCodeRequest extends FormRequest
+class VerificationCodeRequest extends FormRequest
 {
 
     /**

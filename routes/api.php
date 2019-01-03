@@ -82,7 +82,7 @@ $api->version('v1',[
 				->name('api.user.permissions.index');
 		});
 		//短信验证码
-		$api->post('vertificationCodes','VertificationCodesController@store')
+		$api->post('verificationCodes','VerificationCodesController@store')
 		->name('api.vertificationCodes.store');
 		//用户注册
 		$api->post('users','UsersController@store')
