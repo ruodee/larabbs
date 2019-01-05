@@ -14,7 +14,7 @@ class UsersController extends Controller
     {
     	$verifyData = \Cache::get($request->verification_key);
     	if(!hash_equals($verifyData['code'],$request->verification_code)){
-    		//返回401
+    		// 返回401
     		return $this->response->errorUnauthorized('验证码错误');
     	}
 
@@ -23,7 +23,7 @@ class UsersController extends Controller
     		'phone' => $verifyData['phone'],
     		'password' => bcrypt($request->password),
     	]);
-    	//清除验证缓存
+    	// 清除验证缓存
     	\Cache::forget($request->verification_key);
     	return $this->response->item($user,new UserTransformer())
             ->setMeta([
@@ -59,10 +59,10 @@ class UsersController extends Controller
     {
         return $this->response->collection($user->getActiveUsers(),new UserTransformer());
     }
-    //微信小程序注册
+    // 微信小程序注册
     public function weappStore(UserRequest $request)
     {
-        //缓存中是否存在对应的key
+        // 缓存中是否存在对应的key
         $verifyData = \Cache::get($request->verification_key);
 
         if(!$verifyData){

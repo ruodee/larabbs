@@ -21,6 +21,6 @@ class UserObserver
 
    	public function saving(User $user)
    	{
-   		$user->avatar ? : $user->avatar =  'https://fsdhubcdn.phphub.org/uploads/images/201710/30/1/TrJS40Ey5k.png';
+   		$user->avatar ? : $user->avatar =  'https://iocaffcdn.phphub.org/uploads/avatars/76_1451276555.png!/both/200x200';
    	}
 }
