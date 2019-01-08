@@ -113,4 +113,9 @@ class UsersController extends Controller
             ])
             ->setStatusCode(201);
     }
+    // 用户详情
+    public function show(User $user)
+    {
+        return $this->response->item($user, new UserTransformer());
+    }
 }
